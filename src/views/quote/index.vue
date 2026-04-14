@@ -2,6 +2,7 @@
 import { reactive } from 'vue'
 import { useMarketWebSocket } from '@/services/websocket'
 import ScreenScale from '@/components/scaleContainer.vue'
+import logoImage from '@/assets/logo/logo.png'
 
 interface ProductItem {
   category: string
@@ -65,10 +66,44 @@ const productsConfig = reactive({
   <ScreenScale>
     <div class="quote-container">
       <div class="content">
-        <div class="left_content">
-
+        <div class="left_container">
+          <div class="left_content">
+            <div class="left_content_top">
+              <div class="logo_image">
+                <img :src="logoImage" alt="海峡金" class="image"/>
+              </div>
+              <div class="gold_price">
+                <div class="gold_price_title">黄金销售价</div>
+                <div class="gold_price_value">
+                  <span class="price_value">{{ formatPrice(productsConfig.data[0].price) }}</span>
+                  <span class="price_value_unit">元/克</span>
+                </div>
+              </div>
+            </div>
+            <div class="left_content_bottom">
+              <div class="bottom_table">
+                <div class="table_title">
+                  <span class="main_title">上海黄金交易所 (SGE)</span>
+                  <span class="minor_title">数据实时更新</span>
+                </div>
+                <div class="table_content">
+                  <div class="table_header">
+                    <div v-for="col in productsConfig.columns" :key="col.key" class="table-header-content" >
+                      {{ col.label}}
+                    </div>
+                  </div>
+                  <div class="table_body">
+                    <div v-for=" (item, index) in productsConfig.data" :key="item.category" v-show="index !== 0" class="table-row">
+                      <div class="table-cell">{{ item.category }}</div>
+                      <div class="table-cell price-cell">{{ formatPrice(item.price) }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="right_content">
+        <div class="right_container">
 
         </div>
       </div>
@@ -76,7 +111,7 @@ const productsConfig = reactive({
   </ScreenScale>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .quote-container {
   width: 1920px;
   height: 1080px;
@@ -90,15 +125,115 @@ const productsConfig = reactive({
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  padding: 142px 30px 0 30px;
+  gap: 10px;
+  box-sizing: border-box;
 }
-.left_content {
-  width: 50%;
-  background-color: red;
+.left_container {
+  width: 1225px;
+  height: calc(100% - 38px);
+  background-color: #fff;
+  border-radius: 8px;
 }
-.right_content {
-  width: 50%;
+.right_container {
+  width: 620px;
+  height: calc(100% - 38px);
   background-color: blue;
 }
+.left_content_top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.logo_image {
+  margin: 40px 0 30px 0;
+}
+
+.logo_image .image {
+  width: 280px;
+  height: 125px
+}
+.gold_price {
+  width: 1080px;
+  height: 172px;
+  background: #F8F8F8;
+  border-radius: 12px 12px 12px 12px;
+  border: 1px solid #DDDDDD;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.gold_price_title {
+  width: 120px;
+  height: 24px;
+  font-family: PingFang SC, PingFang SC;
+  font-weight: 500;
+  font-size: 24px;
+  color: #333333;
+  line-height: 24px;
+  text-align: center;
+  font-style: normal;
+  text-transform: none;
+}
+.gold_price_value {
+
+}
+.price_value {
+  font-family: PingFang SC, PingFang SC;
+  font-weight: 600;
+  font-size: 48px;
+  color: #F92424;
+  line-height: 48px;
+  text-align: center;
+  font-style: normal;
+  text-transform: none;
+}
+.left_content_bottom {
+  margin-top: 90px;
+}
+.bottom_table {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.table_title .main_title {
+  font-family: PingFang SC, PingFang SC;
+  font-weight: 500;
+  font-size: 24px;
+  color: #333333;
+  line-height: 24px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+}
+.table_title .minor_title {
+  width: 152px;
+  height: 36px;
+  background-color: #EAF4FF;
+  padding: 6px 16px;
+  margin-left: 20px;
+  border-radius: 8px;
+
+  font-family: PingFang SC, PingFang SC;
+  font-weight: 400;
+  font-size: 20px;
+  color: #20518A;
+  line-height: 20px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+}
+.table_content {
+  margin-top:30px;
+}
+
+
+
+
+
+
+
 </style>
