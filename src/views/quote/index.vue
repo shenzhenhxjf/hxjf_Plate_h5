@@ -328,11 +328,11 @@ const productsConfig = reactive({
 }
 
 .table-header-cell {
-  padding: 4px 40px;
+  padding: 20px 55px;
   text-align: left;
   font-weight: 600;
   color: #333;
-  font-size: 25px;
+  font-size: 35px;
 }
 
 .table-header-cell:last-child {
@@ -344,6 +344,7 @@ const productsConfig = reactive({
   flex-direction: column;
   flex: 1;
   overflow-y: auto;
+  gap: 12px;
 }
 
 .table-row {
@@ -364,7 +365,7 @@ const productsConfig = reactive({
 .table-cell {
   padding: 4px 40px;
   color: #333;
-  font-size: 35px;
+  font-size: 45px;
   display: flex;
   align-items: center;
 }
@@ -377,7 +378,7 @@ const productsConfig = reactive({
 .price-cell {
   font-weight: 700;
   color: #e53e3e !important;
-  font-size: 30px;
+  font-size: 45px;
 }
 
 /* Logo 样式 */
