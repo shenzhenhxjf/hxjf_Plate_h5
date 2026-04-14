@@ -3,6 +3,7 @@ import { reactive } from 'vue'
 import { useMarketWebSocket } from '@/services/websocket'
 import ScreenScale from '@/components/scaleContainer.vue'
 import logoImage from '@/assets/logo/logo.png'
+import rightImage from '@/assets/card_content.png'
 
 interface ProductItem {
   category: string
@@ -92,6 +93,7 @@ const productsConfig = reactive({
                       {{ col.label}}
                     </div>
                   </div>
+<!--                  <div class="table_divider"></div>-->
                   <div class="table_body">
                     <div v-for=" (item, index) in productsConfig.data" :key="item.category" v-show="index !== 0" class="table-row">
                       <div class="table-cell">{{ item.category }}</div>
@@ -104,7 +106,7 @@ const productsConfig = reactive({
           </div>
         </div>
         <div class="right_container">
-
+          <img :src="rightImage" alt="海峡金" class="image_content"/>
         </div>
       </div>
     </div>
@@ -140,6 +142,12 @@ const productsConfig = reactive({
   height: calc(100% - 38px);
   background-color: blue;
 }
+.image_content {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .left_content_top {
   display: flex;
   align-items: center;
@@ -197,7 +205,8 @@ const productsConfig = reactive({
 .bottom_table {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  padding-left: 60px;
+  //gap: 30px;
 }
 .table_title .main_title {
   font-family: PingFang SC, PingFang SC;
@@ -228,6 +237,49 @@ const productsConfig = reactive({
 }
 .table_content {
   margin-top:30px;
+  padding: 0 30px;
+}
+.table_header {
+  display: flex;
+  justify-content: space-between;
+
+  font-family: PingFang SC, PingFang SC;
+  font-weight: 500;
+  font-size: 20px;
+  color: #666666;
+  line-height: 20px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+
+  border-bottom: 2px solid #E5E5E5;
+
+
+}
+.table-header-content {
+  padding: 27px;
+}
+.table_body {
+
+}
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px;
+  border-bottom: 2px solid #E5E5E5;
+}
+.table-cell {
+  font-family: PingFang SC, PingFang SC;
+  font-weight: 500;
+  font-size: 24px;
+  color: #1A1A1A;
+  line-height: 24px;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+}
+.price-cell {
+  color: #F92424;
 }
 
 
