@@ -1,3 +1,33 @@
+/* ========== rem 响应式配置 ========== */
+:root {
+  /* 
+    流体字体大小 - 根据视口宽度自动缩放
+    公式: 16px + (100vw - 414px) * (2.67 - 1) / (3840 - 414)
+    - 在414px(手机): font-size ≈ 1rem (16px)
+    - 在1440px(标准): font-size ≈ 1rem (16px)
+    - 在3840px(4K): font-size ≈ 2.67rem (42.67px)
+  */
+  font-size: calc(1rem + (100vw - 25.875rem) * ((2.66875 - 1) / (240 - 25.875)));
+}
+
+/* 防止字体过小 */
+@media (max-width: 414px) {
+  :root {
+    font-size: 1rem;
+  }
+}
+
+/* 防止字体过大 */
+@media (min-width: 3840px) {
+  :root {
+    font-size: 2.67rem;
+  }
+}
+
+* {
+  -webkit-text-size-adjust: 100%;
+}
+
 /*:root {*/
 /*  --text: #6b6375;*/
 /*  --text-h: #08060d;*/

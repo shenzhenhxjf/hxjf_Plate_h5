@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 // import HeaderNavbar from '@/components/headerNavBar/index.vue'
-// import bgImage from '@/assets/bg_logo/bg_logo.png'
+// import bgImage from '@/assets/bg_logo/hjxbg.png'
 import introImage from '@/assets/card_content.png'
 import logoImage from '@/assets/logo/logo.png'
 // import qrcodeImage from '@/assets/one.png'
@@ -68,8 +68,7 @@ const productsConfig = reactive({
 
 <template>
   <div class="quote-container">
-    <!--  <img :src="bgImage" class="bg-image" alt="" />-->
-
+<!--    <img :src="bgImage" class="bg-image" alt=""/>-->
     <!-- 顶部导航 -->
     <!--  <HeaderNavbar />-->
 
@@ -150,16 +149,21 @@ const productsConfig = reactive({
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-  background-color: #333;
+  background-image: url("../../assets/bg_logo/hjxbg.png");
+  background-size: cover;
+  background-position: center;
+  //background-size: 100% auto;
+
 }
 
 .content {
   display: flex;
   justify-content: space-between;
+  margin: 12vh 0 0 0;
   align-items: flex-start;
   width: 100%;
-  height: calc(100vh - 5px);
-  gap: 40px;
+  gap: 10px;
+  height: 86vh;
 
 }
 
@@ -188,7 +192,7 @@ const productsConfig = reactive({
 
 .card {
   width: 40%;
-  height: 100vh;
+  height: 86vh;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 16px;
   overflow: hidden;
@@ -202,15 +206,7 @@ const productsConfig = reactive({
   border-radius: 8px;
 }
 
-.bg-image {
-  position: fixed;
-  top: 40px;
-  left: 0;
-  width: 100vw;
-  object-fit: scale-down;
-  z-index: -1;
-  pointer-events: none;
-}
+
 
 .products-section {
   background: #f5f5f5;
@@ -230,7 +226,7 @@ const productsConfig = reactive({
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  padding: 40px 32px;
+  padding: 20px 32px;
   background: #DDDDDD;
   border-bottom: 1px solid #f0f0f0;
   flex-shrink: 0;
@@ -255,7 +251,7 @@ const productsConfig = reactive({
 }
 
 .gold-bar-image {
-  height: 120px;
+  height: 100px;
   width: auto;
   object-fit: contain;
 }
@@ -295,7 +291,7 @@ const productsConfig = reactive({
 /* 数据源信息 */
 .data-source {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: center;
   align-items: center;
   padding: 12px 32px;
   background: rgba(255, 255, 255, 0.95);
@@ -322,7 +318,6 @@ const productsConfig = reactive({
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap:10px;
 }
 
 .table-header {
@@ -337,7 +332,7 @@ const productsConfig = reactive({
   text-align: left;
   font-weight: 600;
   color: #333;
-  font-size: 35px;
+  font-size: 25px;
 }
 
 .table-header-cell:last-child {
@@ -390,14 +385,14 @@ const productsConfig = reactive({
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 20px;
+  padding: 10px 20px;
   background: rgba(255, 255, 255, 0.95);
   border-bottom: 1px solid #f0f0f0;
   flex-shrink: 0;
 }
 
 .section-logo {
-  height: 70px;
+  height: 50px;
   width: auto;
   object-fit: contain;
 }

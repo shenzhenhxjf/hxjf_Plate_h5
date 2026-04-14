@@ -13,6 +13,11 @@ export default defineConfig({
     },
   },
 
+  // CSS 配置 - 启用 PostCSS 处理 px 转 rem
+  css: {
+    postcss: './postcss.config.mjs',
+  },
+
   build: {
     outDir: 'dist',
     // 3. 建议添加：清除过期文件、压缩配置
