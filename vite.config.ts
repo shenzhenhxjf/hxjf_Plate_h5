@@ -6,6 +6,10 @@ export default defineConfig({
   // 1. 设置基础路径，解决资源 404 问题
   base: './',
   plugins: [vue()],
+  server: {
+    host: true,
+    port: 5173,
+  },
   resolve: {
     alias: {
       // 2. 别名配置
