@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { useMarketWebSocket } from '@/services/websocket'
 import ScreenScale  from '@/components/scaleContainer.vue'
-import logoImage from '@/assets/logo/logo.png'
-import rightImage from '@/assets/card_content.png'
-import goldImage from '@/assets/one.png'
+import { PRICE_COLORS } from '@/utils/colorUtils'
 
 interface ProductItem {
   category: string
@@ -12,6 +10,12 @@ interface ProductItem {
   code: string
   source?: 'huangjin' | 'sge'
 }
+
+// 保存上一个价格用于比较涨跌
+const prevPrices = reactive<Record<string, number | string>>({})
+
+// 当前黄金销售价颜色
+const goldPriceColor = ref(PRICE_COLORS.RISE)
 
 useMarketWebSocket((data: any) => {
   console.log('收到行情数据:', data)
@@ -33,7 +37,27 @@ useMarketWebSocket((data: any) => {
 
       console.log(`查找 ${item.code} (来源:${item.source}):`, priceData)
       if (priceData) {
-        item.price = priceData.xiaoshou ?? priceData.huigou ?? '--'
+        const newPrice = priceData.xiaoshou ?? priceData.huigou ?? '--'
+        
+        // 更新价格时计算颜色（红涨绿跌）
+        if (item.code === 'huangjin9999' && typeof newPrice === 'number' && typeof prevPrices[item.code] === 'number') {
+          const currentPrice = prevPrices[item.code] as number
+          
+          if (goldPriceColor.value === PRICE_COLORS.RISE) {
+            // 红色状态：价格下跌则变绿
+            if (newPrice < currentPrice) {
+              goldPriceColor.value = PRICE_COLORS.FALL
+            }
+          } else {
+            // 绿色状态：只要价格上涨就变红
+            if (newPrice > currentPrice) {
+              goldPriceColor.value = PRICE_COLORS.RISE
+            }
+          }
+        }
+        
+        prevPrices[item.code] = item.price
+        item.price = newPrice
         console.log(`更新 ${item.category}:`, item.price)
       }
     })
@@ -67,10 +91,10 @@ const productsConfig = reactive({
 <template>
   <ScreenScale>
     <div class="quote-container">
-      <div class="content">
+      <div class="one">
         <div class="gold_price_title">黄金销售价</div>
         <div class="gold_price_value">
-          <span class="price_value">{{ formatPrice(productsConfig.data[0].price) }}</span>
+          <span class="price_value" :style="{ color: goldPriceColor }">{{ formatPrice(productsConfig.data[0].price) }}</span>
           <span class="price_value_unit">元/克</span>
         </div>
       </div>
@@ -90,7 +114,7 @@ const productsConfig = reactive({
 .quote-container::before {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: 80px 0 0 0;
   background: url("@/assets/new_h5_bg/new_bg.png") center center / cover no-repeat;
   z-index: 0;
 
@@ -101,6 +125,43 @@ const productsConfig = reactive({
   z-index: 1;
   width: 100%;
   height: 100%;
+}
+.gold_price_title {
+  width: 320px;
+  height: 64px;
+  font-family: PingFang SC, PingFang SC;
+  font-weight: 500;
+  font-size: 64px;
+  color: #333333;
+  line-height: 24px;
+  text-align: center;
+  font-style: normal;
+  text-transform: none;
+}
+.one {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  gap: 75px;
+  margin-top: -55px;
+}
+.price_value {
+  font-family: PingFang SC, PingFang SC;
+  font-weight: 600;
+  font-size: 170px;
+  color: #F92424;
+  line-height: 48px;
+  text-align: center;
+  font-style: normal;
+  text-transform: none;
+}
+.price_value_unit {
+  font-size: 40px;
 }
 
 </style>
