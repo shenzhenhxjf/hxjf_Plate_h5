@@ -15,7 +15,7 @@ interface ProductItem {
 const prevPrices = reactive<Record<string, number | string>>({})
 
 // 当前黄金销售价颜色
-const goldPriceColor = ref(PRICE_COLORS.RISE)
+const goldPriceColor = ref<string>(PRICE_COLORS.RISE)
 
 useMarketWebSocket((data: any) => {
   console.log('收到行情数据:', data)
@@ -38,11 +38,11 @@ useMarketWebSocket((data: any) => {
       console.log(`查找 ${item.code} (来源:${item.source}):`, priceData)
       if (priceData) {
         const newPrice = priceData.xiaoshou ?? priceData.huigou ?? '--'
-        
+
         // 更新价格时计算颜色（红涨绿跌）
         if (item.code === 'huangjin9999' && typeof newPrice === 'number' && typeof prevPrices[item.code] === 'number') {
           const currentPrice = prevPrices[item.code] as number
-          
+
           if (goldPriceColor.value === PRICE_COLORS.RISE) {
             // 红色状态：价格下跌则变绿
             if (newPrice < currentPrice) {
@@ -55,7 +55,7 @@ useMarketWebSocket((data: any) => {
             }
           }
         }
-        
+
         prevPrices[item.code] = item.price
         item.price = newPrice
         console.log(`更新 ${item.category}:`, item.price)
