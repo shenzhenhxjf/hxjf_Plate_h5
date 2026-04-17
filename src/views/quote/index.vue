@@ -68,8 +68,10 @@ const productsConfig = reactive({
   <ScreenScale>
     <div class="quote-container">
       <div class="content">
-        <div>
-
+        <div class="gold_price_title">黄金销售价</div>
+        <div class="gold_price_value">
+          <span class="price_value">{{ formatPrice(productsConfig.data[0].price) }}</span>
+          <span class="price_value_unit">元/克</span>
         </div>
       </div>
     </div>
