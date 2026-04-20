@@ -115,7 +115,7 @@ const productsConfig = reactive({
   content: '';
   position: absolute;
   inset: 80px 0 0 0;
-  background: url("@/assets/new_h5_bg/new_bg.png") center center / cover no-repeat;
+  background: url("https://can-open-resource-shenzhenhxjf.oss-cn-shenzhen.aliyuncs.com/public/f39b31be-4e37-4662-90d7-00da85d054ab") center center / cover no-repeat;
   z-index: 0;
 
 }
