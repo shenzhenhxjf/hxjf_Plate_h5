@@ -1,0 +1,43 @@
+name: workflow.yml
+on:
+  push:
+    branches: [ hxj_quote ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.19.0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9.15.0
+
+      - name: Install dependencies
+        run: |
+          export NODE_OPTIONS="--max-old-space-size=8192"
+          pnpm install
+
+      - name: Build client-h5
+        run: pnpm run build
+
+      - name: Deploy to Server H5
+        uses: burnett01/rsync-deployments@4.0
+        with:
+          switches: -avzr --delete --exclude=".git" --exclude=".github"
+          path: ./dist/
+          remote_path: /opt/html/dp_price2
+          remote_host: 47.115.93.35
+          remote_user: root
+          remote_key: ${{ secrets.DEPLOY_KEY }}
+          remote_port: 10745
+
+

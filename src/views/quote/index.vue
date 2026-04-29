@@ -453,7 +453,7 @@ const formatPrice = (price: any) => {
   height: 100vh;
   overflow: hidden;
 
-  background-image: url('@/assets/hxj_quote/hxj_quote.png');
+  background-image: url('https://can-open-resource-shenzhenhxjf.oss-cn-shenzhen.aliyuncs.com/public/bfc0f19a-f996-4493-9b1e-7835bab5af4b');
   background-repeat: no-repeat;
   background-position: center center;
 
