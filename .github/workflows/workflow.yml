@@ -1,7 +1,7 @@
 name: workflow.yml
 on:
   push:
-    branches: [ hxj_quote ]
+    branches: [ zxj_quote ]
 
 jobs:
   build:
@@ -34,7 +34,7 @@ jobs:
         with:
           switches: -avzr --delete --exclude=".git" --exclude=".github"
           path: ./dist/
-          remote_path: /opt/html/dp_price2
+          remote_path: /opt/html/dp_price3
           remote_host: 47.115.93.35
           remote_user: root
           remote_key: ${{ secrets.DEPLOY_KEY }}
