@@ -76,7 +76,7 @@ const formatPrice = (price: any) => {
   height: 100vh;
   overflow: hidden;
 
-  background-image: url('https://thhjg-open.oss-cn-shenzhen.aliyuncs.com/public/9ed5c7f1-cb2f-4b57-9973-4b30ed37f0d5');
+  background-image: url('https://can-open-resource-shenzhenhxjf.oss-cn-shenzhen.aliyuncs.com/public/c3cb82f8-8003-421b-98ff-3afc75eb7c0c');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 100% 100%;
